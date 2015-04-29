@@ -1,3 +1,4 @@
+// Package places provides a client for the Google Places API
 package places
 
 import "net/http"
