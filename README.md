@@ -5,6 +5,10 @@
 
 A Go client for the [Google Places API](https://developers.google.com/places/webservice/). A work in progress, contributions welcome.
 
+```
+go get github.com/maxhawkins/google-places-api/places
+```
+
 #### What's done
 
 * Place Details
