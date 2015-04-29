@@ -1,7 +1,7 @@
 # Google Places API Client for Go
 
 [![Build Status](https://travis-ci.org/maxhawkins/google-places-api.png)](https://travis-ci.org/maxhawkins/google-places-api)
-[![GoDoc](https://godoc.org/github.com/maxhawkins/google-places-api?status.svg)](http://godoc.org/github.com/maxhawkins/google-places-api)
+[![GoDoc](https://godoc.org/github.com/maxhawkins/google-places-api/places?status.svg)](http://godoc.org/github.com/maxhawkins/google-places-api/places)
 
 A Go client for the [Google Places API](https://developers.google.com/places/webservice/). A work in progress, contributions welcome.
 
