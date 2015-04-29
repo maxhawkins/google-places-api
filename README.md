@@ -5,9 +5,49 @@
 
 A Go client for the [Google Places API](https://developers.google.com/places/webservice/). A work in progress, contributions welcome.
 
+To install this package, run:
+
 ```
 go get github.com/maxhawkins/google-places-api/places
 ```
+
+## Example
+
+``` go
+package main
+
+import (
+    "fmt"
+    "net/http"
+
+    "github.com/maxhawkins/google-places-api/places"
+)
+
+func main() {
+    service := places.NewService(http.DefaultClient, "<your api key>")
+
+    call := service.Nearby(37.7833, -122.4167) // San Francisco
+    call.Types = append(call.Types, places.Cafe)
+    call.Radius = 7000
+
+    resp, err := call.Do()
+    if places.IsZeroResults(err) {
+        fmt.Println("no results")
+        return
+    }
+    if err != nil {
+        panic(err)
+    }
+
+    for _, result := range resp.Results {
+        fmt.Println(result.Name)
+    }
+}
+```
+
+## Status
+
+This package is a work in progress. Not all API calls are implemented.
 
 #### What's done
 
@@ -23,4 +63,4 @@ go get github.com/maxhawkins/google-places-api/places
 * Place Photos
 * Place Autocomplete
 * Query Autocomplete
-* Examples
+* More Examples
