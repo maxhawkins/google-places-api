@@ -56,12 +56,19 @@ func (d *DetailsCall) Do() (*DetailsResponse, error) {
 		return nil, err
 	}
 
+	if data.Status != "OK" {
+		return nil, &apiError{
+			Status:  data.Status,
+			Message: data.ErrorMessage,
+		}
+	}
+
 	return data, nil
 }
 
 type DetailsResponse struct {
 	Result           PlaceDetails `json:"result"`
-	Status           Status       `json:"status"`
+	Status           string       `json:"status"`
 	ErrorMessage     string       `json:"error_message"`
 	HTMLAttributions []string     `json:"html_attributions"`
 }

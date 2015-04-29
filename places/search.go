@@ -77,6 +77,13 @@ func (n *NearbyCall) Do() (*SearchResponse, error) {
 		return nil, err
 	}
 
+	if data.Status != "OK" {
+		return nil, &apiError{
+			Status:  data.Status,
+			Message: data.ErrorMessage,
+		}
+	}
+
 	return data, nil
 }
 
@@ -206,6 +213,13 @@ func (r *RadarSearchCall) Do() (*SearchResponse, error) {
 		return nil, err
 	}
 
+	if data.Status != "OK" {
+		return nil, &apiError{
+			Status:  data.Status,
+			Message: data.ErrorMessage,
+		}
+	}
+
 	return data, nil
 }
 
@@ -213,7 +227,7 @@ type SearchResponse struct {
 	// A list of results matching the query
 	Results []PlaceDetails `json:"results"`
 	// Contains debugging information to help you track down why the request failed
-	Status Status `json:"status"`
+	Status string `json:"status"`
 	// More detailed information about the reasons behind the given status code.
 	ErrorMessage string `json:"error_message,omitempty"`
 	// A set of attributions about this listing which must be displayed to the user.
