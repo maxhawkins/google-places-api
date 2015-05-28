@@ -106,13 +106,19 @@ func (n *NearbyCall) Do() (*SearchResponse, error) {
 func (r *NearbyCall) query() string {
 	query := make(url.Values)
 	query.Add("key", r.service.key)
+	query.Add("location", fmt.Sprintf("%f,%f", r.lat, r.lng))
+
+	if r.PageToken != "" {
+		query.Add("pagetoken", r.PageToken)
+		return query.Encode()
+	}
+
 	if r.Keyword != "" {
 		query.Add("keyword", r.Keyword)
 	}
 	if r.Language != "" {
 		query.Add("language", r.Language)
 	}
-	query.Add("location", fmt.Sprintf("%f,%f", r.lat, r.lng))
 	if r.MinPrice != nil {
 		query.Add("minprice", fmt.Sprint(*r.MinPrice))
 	}
@@ -125,22 +131,22 @@ func (r *NearbyCall) query() string {
 	if r.OpenNow {
 		query.Add("opennow", fmt.Sprint(1))
 	}
-	if r.RankBy != RankByDistance {
+	if r.RankBy != RankByDistance && r.Radius > 0 {
 		query.Add("radius", fmt.Sprint(r.Radius))
 	}
-	query.Add("rankby", string(r.RankBy))
+	if r.RankBy != "" {
+		query.Add("rankby", string(r.RankBy))
+	}
+	if r.ZagatSelected {
+		query.Add("zagatselected", "")
+	}
 
 	var typeNames []string
 	for _, t := range r.Types {
 		typeNames = append(typeNames, string(t))
 	}
-	query.Add("types", strings.Join(typeNames, "|"))
-
-	if r.ZagatSelected {
-		query.Add("zagatselected", "")
-	}
-	if r.PageToken != "" {
-		query.Add("pagetoken", r.PageToken)
+	if len(typeNames) > 0 {
+		query.Add("types", strings.Join(typeNames, "|"))
 	}
 
 	return query.Encode()
@@ -200,7 +206,9 @@ func (r *RadarSearchCall) query() string {
 	for _, t := range r.Types {
 		typeNames = append(typeNames, string(t))
 	}
-	query.Add("types", strings.Join(typeNames, "|"))
+	if len(typeNames) > 0 {
+		query.Add("types", strings.Join(typeNames, "|"))
+	}
 
 	if r.ZagatSelected {
 		query.Add("zagatselected", "")
