@@ -10,6 +10,11 @@ import (
 	"strings"
 )
 
+var (
+	errInvalidByProminence = errors.New("radius must be specified when RankByProminence is used")
+	errInvalidByDistance   = errors.New("when RankByDistance is specified, one or more of keyword, name, or types is required")
+)
+
 // Nearby lets you search for places within a specified area. You can refine your search request by supplying keywords or specifying the type of place you are searching for.
 func (p *Service) Nearby(lat, lng float64) *NearbyCall {
 	return &NearbyCall{
@@ -47,15 +52,26 @@ type NearbyCall struct {
 	PageToken string
 }
 
-func (n *NearbyCall) Do() (*SearchResponse, error) {
-	if n.RankBy == RankByProminence && n.Radius == 0 {
-		return nil, errors.New("radius must be specified when RankByProminence is used")
+func (n *NearbyCall) validate() error {
+	if n.PageToken != "" {
+		return nil
 	}
-	if n.RankBy == RankByDistance &&
-		n.Types == nil &&
-		n.Name == "" &&
-		n.Keyword == "" {
-		return nil, errors.New("when RankByDistance is specified, one or more of keyword, name, or types is required")
+	switch n.RankBy {
+	case RankByDefault, RankByProminence:
+		if n.Radius == 0 {
+			return errInvalidByProminence
+		}
+	case RankByDistance:
+		if n.Types == nil && n.Name == "" && n.Keyword == "" {
+			return errInvalidByDistance
+		}
+	}
+	return nil
+}
+
+func (n *NearbyCall) Do() (*SearchResponse, error) {
+	if err := n.validate(); err != nil {
+		return nil, err
 	}
 
 	searchURL := baseURL + "/nearbysearch/json?" + n.query()
@@ -240,6 +256,8 @@ type SearchResponse struct {
 type RankBy string
 
 const (
+	// RankByDefault is an alias for RankByProminence
+	RankByDefault RankBy = ""
 	// RankByProminence sorts results based on their importance. Ranking will favor prominent places within the specified area. Prominence can be affected by a place's ranking in Google's index, global popularity, and other factors.
 	RankByProminence RankBy = "prominence"
 	// RankByDistance sorts results in ascending order by their distance from the specified location.
