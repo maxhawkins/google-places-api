@@ -19,6 +19,7 @@ package main
 import (
     "fmt"
     "net/http"
+    "time"
 
     "github.com/maxhawkins/google-places-api/places"
 )
@@ -28,7 +29,7 @@ func main() {
 
     call := service.Nearby(37.7833, -122.4167) // San Francisco
     call.Types = append(call.Types, places.Cafe)
-    call.Radius = 7000
+    call.Radius = 500
 
     resp, err := call.Do()
     if places.IsZeroResults(err) {
@@ -39,7 +40,23 @@ func main() {
         panic(err)
     }
 
-    for _, result := range resp.Results {
+    results := resp.Results
+    token := resp.NextPageToken
+
+    for token != "" {
+        time.Sleep(2 * time.Second) // Rate limit
+
+        call.PageToken = token
+        resp, err := call.Do()
+        if err != nil {
+            panic(err)
+        }
+
+        token = resp.NextPageToken
+        results = append(results, resp.Results...)
+    }
+
+    for _, result := range results {
         fmt.Println(result.Name)
     }
 }
