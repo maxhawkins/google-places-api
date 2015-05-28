@@ -257,7 +257,7 @@ type SearchResponse struct {
 	// A set of attributions about this listing which must be displayed to the user.
 	HTMLAttributions []string `json:"html_attributions"`
 	// A token that can be used to return up to 20 additional results. A next_page_token will not be returned if there are no additional results to display. The maximum number of results that can be returned is 60. There is a short delay between when a next_page_token is issued, and when it will become valid.
-	NextPageToken *string `json:"next_page_token"`
+	NextPageToken string `json:"next_page_token"`
 }
 
 // RankBy specifies the order in which results are listed.
