@@ -40,7 +40,7 @@ func (d *DetailsCall) query() string {
 }
 
 func (d *DetailsCall) Do() (*DetailsResponse, error) {
-	searchURL := baseURL + "/details/json?" + d.query()
+	searchURL := d.service.url + "/details/json?" + d.query()
 
 	resp, err := d.service.client.Get(searchURL)
 	if err != nil {
