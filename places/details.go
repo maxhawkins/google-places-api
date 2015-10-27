@@ -46,6 +46,8 @@ func (d *DetailsCall) Do() (*DetailsResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
