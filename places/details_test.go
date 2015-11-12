@@ -11,11 +11,6 @@ import (
 )
 
 func TestDetailsCallDo(t *testing.T) {
-	// open a test server and immediatly close it
-	// we do this to get a valid test URL later on in the communcation fault test
-	cts := httptest.NewServer(http.HandlerFunc(handler))
-	cts.Close()
-
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
@@ -52,14 +47,6 @@ func TestDetailsCallDo(t *testing.T) {
 			PlaceID: "invalid_json",
 			URL:     ts.URL,
 			Want:    errors.New("json: cannot unmarshal string into Go value of type places.DetailsResponse"),
-		},
-		{
-			Name:    "Communication Problem",
-			PlaceID: "wrong",
-			URL:     cts.URL,
-			Want: errors.New(
-				"Get " + cts.URL + "/details/json?key=testkey&placeid=wrong: dial tcp " + cts.Listener.Addr().String() + ": getsockopt: connection refused",
-			),
 		},
 	} {
 		var service = Service{
