@@ -225,7 +225,7 @@ type PlaceDetails struct {
 	// A simplified address for the place, including the street name, street number, and locality, but not the province/state, postal code, or country.
 	Vicinity string `json:"vicinity"`
 	// The authoritative website for this place, such as a business' homepage.
-	Website string `json:website"`
+	Website string `json:"website"`
 	// Contains a single AspectRating object, for the primary rating of that establishment. (Only available to Google Places API for Work customers.)
 	Aspects []AspectRating `json:"aspects"`
 	// Indicates that the place has been selected as a Zagat quality location. The Zagat label identifies places known for their consistently high quality or that have a special or unique character. (Only available to Google Places API for Work customers.)
