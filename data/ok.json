@@ -1,0 +1,286 @@
+{
+   "html_attributions" : [],
+   "result" : {
+      "address_components" : [
+         {
+            "long_name" : "5",
+            "short_name" : "5",
+            "types" : [ "floor" ]
+         },
+         {
+            "long_name" : "48",
+            "short_name" : "48",
+            "types" : [ "street_number" ]
+         },
+         {
+            "long_name" : "Pirrama Road",
+            "short_name" : "Pirrama Rd",
+            "types" : [ "route" ]
+         },
+         {
+            "long_name" : "Pyrmont",
+            "short_name" : "Pyrmont",
+            "types" : [ "locality", "political" ]
+         },
+         {
+            "long_name" : "New South Wales",
+            "short_name" : "NSW",
+            "types" : [ "administrative_area_level_1", "political" ]
+         },
+         {
+            "long_name" : "Australia",
+            "short_name" : "AU",
+            "types" : [ "country", "political" ]
+         },
+         {
+            "long_name" : "2009",
+            "short_name" : "2009",
+            "types" : [ "postal_code" ]
+         }
+      ],
+      "adr_address" : "5, \u003cspan class=\"street-address\"\u003e48 Pirrama Rd\u003c/span\u003e, \u003cspan class=\"locality\"\u003ePyrmont\u003c/span\u003e \u003cspan class=\"region\"\u003eNSW\u003c/span\u003e \u003cspan class=\"postal-code\"\u003e2009\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eAustralia\u003c/span\u003e",
+      "formatted_address" : "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
+      "formatted_phone_number" : "(02) 9374 4000",
+      "geometry" : {
+         "location" : {
+            "lat" : -33.866611,
+            "lng" : 151.195832
+         }
+      },
+      "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id" : "4f89212bf76dde31f092cfc14d7506555d85b5c7",
+      "international_phone_number" : "+61 2 9374 4000",
+      "name" : "Google",
+      "opening_hours" : {
+         "open_now" : false,
+         "periods" : [
+            {
+               "close" : {
+                  "day" : 1,
+                  "time" : "1730"
+               },
+               "open" : {
+                  "day" : 1,
+                  "time" : "0830"
+               }
+            },
+            {
+               "close" : {
+                  "day" : 2,
+                  "time" : "1730"
+               },
+               "open" : {
+                  "day" : 2,
+                  "time" : "0830"
+               }
+            },
+            {
+               "close" : {
+                  "day" : 3,
+                  "time" : "1730"
+               },
+               "open" : {
+                  "day" : 3,
+                  "time" : "0830"
+               }
+            },
+            {
+               "close" : {
+                  "day" : 4,
+                  "time" : "1730"
+               },
+               "open" : {
+                  "day" : 4,
+                  "time" : "0830"
+               }
+            },
+            {
+               "close" : {
+                  "day" : 5,
+                  "time" : "1700"
+               },
+               "open" : {
+                  "day" : 5,
+                  "time" : "0830"
+               }
+            }
+         ],
+         "weekday_text" : [
+            "Monday: 8:30 AM – 5:30 PM",
+            "Tuesday: 8:30 AM – 5:30 PM",
+            "Wednesday: 8:30 AM – 5:30 PM",
+            "Thursday: 8:30 AM – 5:30 PM",
+            "Friday: 8:30 AM – 5:00 PM",
+            "Saturday: Closed",
+            "Sunday: Closed"
+         ]
+      },
+      "photos" : [
+         {
+            "height" : 2322,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/107252953636064841537\"\u003eWilliam Stewart\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAJnqN4IdPO-sCQtIpxTgSpr2YEnr-MGNQ8XXu31KfAmBT4_puqlafXWJHqe3sEb3HdQkwTOtUwR2vUysDXdwMuSbrptQGbFTi5ZwdcA153wEiUqw8zophYmv4t5kyU_g4EhDG0tPx1U_Iv54r_skZCnEDGhTtaNU4TapHOiCxvq0lY8CaGU_oBQ",
+            "width" : 4128
+         },
+         {
+            "height" : 1365,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/105932078588305868215\"\u003eMaksym Kozlenko\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAA5RuRuKWgd9FVKDWsotHNf0MbpTPrA43LJ6Ig0gnRgTQiYa1GdpOgWajUNe-FghvvYM8XuzW3GjH8fnBrV_TjU-KXHSnXfhK1yTAfqINKoxOU0iM-cRa9tFJknooGY3-LEhAfHaj9yX-JzQbyikwvTpTTGhQinM8AeY6G3UWtQuUfnvjGtlF-gw",
+            "width" : 2048
+         },
+         {
+            "height" : 960,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/100919424873665842845\"\u003eDonnie Piercey\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAALvfarh8TFsgD78b0X4X9mYEZwj6Drn16TPRs8ltfwdSXLnUHNkuWz8mqVO_atdGzu9rZVS9ulNL7EF5omQuj1nj-CDlhS-STHtXfKzrsyTYeRR1EK78ozKTnOYXbXyW3EhDL0OAfy_KEeTNa-oYgIra-GhSzwCdKxGGBL9N5p5JUrPRWxSwSgg",
+            "width" : 1280
+         },
+         {
+            "height" : 1131,
+            "html_attributions" : [ "From a Google User" ],
+            "photo_reference" : "CmRdAAAAQFNMhFL4UdskZB_zrOGE_UpxqZvY56ghV3lMsBypEZBugV44rToMDiN6G2kb5NACtCudtepgB2ocI02DFXlXHt6JEFRQCp3JVm7-Rws-_D5YYg0TQcf9SzJXh9EKP9a6EhCL1-2-kTx_y1EvnEt6DNLEGhQMUXtPqxRiesIno-RVpm8vat_X4g",
+            "width" : 1600
+         },
+         {
+            "height" : 2048,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/104177669626132953795\"\u003eJustine OBRIEN\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAM_FcEYeI35dAj5JGF3STKwKeJyPTGAlE6OYeV0BNxfbD96DEGYudY9qluo_MrZuIg966MHTNS5l-89YqIEEdJATSzOA-x5MNAIK0fdoP_SBUVBKKWyrGYuSEUm_gugCcEhC7Td0bZPBr0f2IUrd-UsfKGhSpO8SXE8dkJghS-b8rqglSEQyzPw",
+            "width" : 1536
+         },
+         {
+            "height" : 2048,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/104177669626132953795\"\u003eJustine OBRIEN\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAA28BsWrWQsjy8aTMMWRIn_LN3DizZH2kzjaX_J-9sDzGl4VLlHSL_cs9s02tg2DUM3b-p0vFk5SEOcdO_1x7fdGE78hTX19_TLFndegGAuJlWQLdSvtF3b9te70vwjbgGEhCNTFMpJvuapxYJ2vPYyB7vGhQxduKd1HNLrFrHeWydN94NLKnZJA",
+            "width" : 1536
+         },
+         {
+            "height" : 612,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/114701241123617315548\"\u003eMargaret L\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAH0-3TsxYUSB_VnBaLPM5KhZd844xQBqk9HxB6AxAP3iiGBAbVei5uxCAuH5mzlV4FMfMSkBWtm0CUjX46W2k8dFQSJUI-ZPAXksJQ5LkXJRaqi8ZvzKYfBLADrRy-BxFEhArm6lX4lznfdcdSeHaFXlVGhRxvwTPP3UtH80KNQ7OZDYagOyG8A",
+            "width" : 816
+         },
+         {
+            "height" : 1224,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/102793072679802771755\"\u003eKeith Denny\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAUrHYXvGaMKzbHjZ5398Or-fGfARpBxF6WTXwlFE9IFy3S0vj61xFq7L59MXbfDhNarYXyM58fgu5RtgBxhc2N8csGgrQb0asossxb4LzuSFFZzOKqNZ6K_gEtM92VuGJEhDQiIgKySBv0aAHzzbmQkNpGhRuFvgIZVEP9h5kLERXv06oG8KVyQ",
+            "width" : 1632
+         },
+         {
+            "height" : 608,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/116750797999944764767\"\u003eJessica Pfund\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAwMOSV0qnnrWH9D6QN8ozDig5h-TF_j7pyxPxFHNq7fyh-zHrKemW1i5pttuCP3vnQOB9P-EjpxtBMH2Kz2qbtGXrLsBL7VPgBYbTBCT5xgSz8DM087OagDTqJYqS2Pp-EhDUvVIevsdYfaNcT8NbKa5KGhSggP6gGXakYKC-fU7VjypxDdj1Xg",
+            "width" : 1080
+         },
+         {
+            "height" : 2368,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/108508601154030859314\"\u003eLeo Angelo George\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRdAAAAanYq-8UKtdGoR5GsWkjYrRZ8MTJsgA3ApE2A3rXXmJ_3hL0WNlXOKdJ0l6AwK0yoW1dIQNV7ct8RZLeXfXXdwu5idETayaBKZIRs5w4aWgIHx5BreDNwV6RiEVdNcfA0EhApGMNEzsFJh9wi33aP3ze4GhSVAdxe71B7gv52rlNPIk438KGkZg",
+            "width" : 3200
+         }
+      ],
+      "place_id" : "ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "rating" : 4.4,
+      "reference" : "CmRaAAAAB9UUiSe2IgY6iRnnkz0MFGGPBm5lrvOI8_URe5UwDX29X_TVIEbKDLX-W1V5m_vQ0-XdNBjlGPYS9GPawClaHHSwoczsDd6PlH54bhQ_x91QAm1sIJcQyckjQ46vLhm9EhA6_Pc59QGco5F16SKq0RH0GhSgc8c6uYfbJIUvx6_KgZrsrNraTg",
+      "reviews" : [
+         {
+            "aspects" : [
+               {
+                  "rating" : 3,
+                  "type" : "overall"
+               }
+            ],
+            "author_name" : "Danielle Lonnon",
+            "author_url" : "https://plus.google.com/118257578392162991040",
+            "language" : "en",
+            "profile_photo_url" : "//lh5.googleusercontent.com/-laqORDSvktk/AAAAAAAAAAI/AAAAAAAApfw/hX9vqf6fJ2g/photo.jpg",
+            "rating" : 5,
+            "text" : "As someone who works in the theatre, I don't find the Google offices nerdy, I find it magical and theatrical. Themed rooms  with useful props and big sets with unique and charismatic characters. You sure this isn't a theatre company? Oh no wait Google has money, while the performing art does not.",
+            "time" : 1425790392
+         },
+         {
+            "aspects" : [
+               {
+                  "rating" : 3,
+                  "type" : "overall"
+               }
+            ],
+            "author_name" : "Lachlan Martin",
+            "author_url" : "https://plus.google.com/101767769287488554641",
+            "language" : "en",
+            "profile_photo_url" : "//lh6.googleusercontent.com/-TuBhQ6C9ViI/AAAAAAAAAAI/AAAAAAAACcY/3Web5Iqk6vg/photo.jpg",
+            "rating" : 5,
+            "text" : "The cool-aid here tastes amazing!!! ",
+            "time" : 1439790358
+         },
+         {
+            "aspects" : [
+               {
+                  "rating" : 3,
+                  "type" : "overall"
+               }
+            ],
+            "author_name" : "Rob Mulally",
+            "author_url" : "https://plus.google.com/100839435712919930388",
+            "language" : "en",
+            "profile_photo_url" : "//lh5.googleusercontent.com/-eJvkSEajcmE/AAAAAAAAAAI/AAAAAAAA4EU/Z_D65lpp0gU/photo.jpg",
+            "rating" : 5,
+            "text" : "What can I say, what a great building, cool offices and friendly staff!\nonly had a quick tour but there isn't much missing from this world class modern office.\n\nIf your staff who work here I hope you take advantage of all that it offers , because as a visitor it was a very impressive setup. \n\nThe thing that stood out besides the collaborative area's and beds for resting, was the food availability.\n\nImpressed. 5 Stars.\n",
+            "time" : 1408284830
+         },
+         {
+            "aspects" : [
+               {
+                  "rating" : 3,
+                  "type" : "overall"
+               }
+            ],
+            "author_name" : "Marco Palmero",
+            "author_url" : "https://plus.google.com/103363668747424636403",
+            "language" : "en",
+            "profile_photo_url" : "//lh3.googleusercontent.com/-UCfQBxJo1Us/AAAAAAAAAAI/AAAAAAAAAZM/iouy_EAec3w/photo.jpg",
+            "rating" : 5,
+            "text" : "I've been fortunate enough to have visited the Google offices on multiple occasions through the years and I've found this place to be quite awesome. This particular office is the original campus for Google Sydney and they've expanded to the Fairfax building where they've built an even more exciting office!\n\nTotally jealous of their cafeteria and the city views from their office!",
+            "time" : 1413529682
+         },
+         {
+            "aspects" : [
+               {
+                  "rating" : 2,
+                  "type" : "overall"
+               }
+            ],
+            "author_name" : "Shih-Tai Ma",
+            "author_url" : "https://plus.google.com/101113966669480942038",
+            "language" : "en",
+            "rating" : 4,
+            "text" : "A visit to Google Sydney would be valuable while waiting for the replies for our applications. My friend and I spent hours walking and finally arrived Google Sydney.\nA harbor and wonderful sights surround the building of Google Sydney, with a cafe outside and restaurant inside.\nA colorful word \"Google\" can be seen through the gate.\nWe went to the fifth floor and saw doors closed. People who input codes may pass.\nFortunately, a kind man at Google Reception waved to us and we finally got into Google.\nBecause of his detailed explanation, we finally realized only the invited's could be guided inside.\nA vivid wall is behind the Google Reception, with leaves and vines, making the room like a garden. A swing is near the door, made of the rope tied on ceiling with a tire.\nOn leaving, I saw two women holding plates coming from downstairs and noticed there was a kitchen. We couldn't see more for no permission.\nWhile staring at the buttons in the elevator, a passing woman came in and help us press a button quickly only at a glance at us. Kind people with rapid reliable actions are there. The ground floor is nice place to relax our legs and enjoy the environment.\nHope I can share more.",
+            "time" : 1402541063
+         }
+      ],
+      "scope" : "GOOGLE",
+      "types" : [ "establishment" ],
+      "url" : "https://plus.google.com/111337342022929067349/about?hl=en-US",
+      "user_ratings_total" : 99,
+      "utc_offset" : 660,
+      "vicinity" : "5 48 Pirrama Road, Pyrmont",
+      "website" : "https://www.google.com.au/about/careers/locations/sydney/"
+   },
+   "status" : "OK"
+}

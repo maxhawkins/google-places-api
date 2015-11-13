@@ -40,12 +40,14 @@ func (d *DetailsCall) query() string {
 }
 
 func (d *DetailsCall) Do() (*DetailsResponse, error) {
-	searchURL := baseURL + "/details/json?" + d.query()
+	searchURL := d.service.url + "/details/json?" + d.query()
 
 	resp, err := d.service.client.Get(searchURL)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
@@ -223,7 +225,7 @@ type PlaceDetails struct {
 	// A simplified address for the place, including the street name, street number, and locality, but not the province/state, postal code, or country.
 	Vicinity string `json:"vicinity"`
 	// The authoritative website for this place, such as a business' homepage.
-	Website string `json:website"`
+	Website string `json:"website"`
 	// Contains a single AspectRating object, for the primary rating of that establishment. (Only available to Google Places API for Work customers.)
 	Aspects []AspectRating `json:"aspects"`
 	// Indicates that the place has been selected as a Zagat quality location. The Zagat label identifies places known for their consistently high quality or that have a special or unique character. (Only available to Google Places API for Work customers.)
