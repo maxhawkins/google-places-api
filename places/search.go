@@ -80,6 +80,7 @@ func (n *NearbyCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
@@ -227,6 +228,7 @@ func (r *RadarSearchCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
