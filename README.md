@@ -8,7 +8,7 @@ A Go client for the [Google Places API](https://developers.google.com/places/web
 To install this package, run:
 
 ```
-go get github.com/maxhawkins/google-places-api/places
+go get gopkg.in/user/pkg.v1
 ```
 
 ## Example
