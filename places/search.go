@@ -80,10 +80,14 @@ func (n *NearbyCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
+
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
 	}
@@ -152,7 +156,7 @@ func (r *NearbyCall) query() string {
 	return query.Encode()
 }
 
-// The Text Search Service is a web service that returns information about a set of places based on a string.
+// TextSearch let's you search The Text Search Service is a web service that returns information about a set of places based on a string.
 func (p *Service) TextSearch(query string) *TextSearchCall {
 	return &TextSearchCall{
 		service:  p,
@@ -160,6 +164,7 @@ func (p *Service) TextSearch(query string) *TextSearchCall {
 	}
 }
 
+// TextSearchCall the struct that performs the call
 type TextSearchCall struct {
 	service *Service
 
@@ -192,6 +197,7 @@ func (t *TextSearchCall) validate() error {
 	return nil
 }
 
+// Do Perform the actual request on TextSearchCall
 func (t *TextSearchCall) Do() (*SearchResponse, error) {
 	if err := t.validate(); err != nil {
 		return nil, err
@@ -206,6 +212,9 @@ func (t *TextSearchCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
 	}
@@ -234,9 +243,9 @@ func (t *TextSearchCall) query() string {
 		return query.Encode()
 	}
 
-	if t.lat > 0 && t.lng > 0 {
-		query.Add("location", fmt.Sprintf("%f,%f", t.lat, t.lng))
-	}
+	addLocationToQuery(query, t.lat, t.lng)
+	addTypesToQuery(query, t.Types)
+
 	if t.Language != "" {
 		query.Add("language", t.Language)
 	}
@@ -257,14 +266,6 @@ func (t *TextSearchCall) query() string {
 	}
 	if t.ZagatSelected {
 		query.Add("zagatselected", "")
-	}
-
-	var typeNames []string
-	for _, t := range t.Types {
-		typeNames = append(typeNames, string(t))
-	}
-	if len(typeNames) > 0 {
-		query.Add("types", strings.Join(typeNames, "|"))
 	}
 
 	return query.Encode()
@@ -355,6 +356,8 @@ func (r *RadarSearchCall) Do() (*SearchResponse, error) {
 		return nil, err
 	}
 
+	defer resp.Body.Close()
+
 	if data.Status != "OK" {
 		return nil, &apiError{
 			Status:  data.Status,
@@ -389,3 +392,19 @@ const (
 	// RankByDistance sorts results in ascending order by their distance from the specified location.
 	RankByDistance RankBy = "distance"
 )
+
+func addLocationToQuery(query url.Values, latitude, longitude float64) {
+	if latitude > 0 && longitude > 0 {
+		query.Add("location", fmt.Sprintf("%f,%f", latitude, longitude))
+	}
+}
+
+func addTypesToQuery(query url.Values, types []FeatureType) {
+	var typeNames []string
+	for _, t := range types {
+		typeNames = append(typeNames, string(t))
+	}
+	if len(typeNames) > 0 {
+		query.Add("types", strings.Join(typeNames, "|"))
+	}
+}
