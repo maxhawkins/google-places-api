@@ -13,6 +13,13 @@ import (
 var (
 	errInvalidByProminence = errors.New("radius must be specified when RankByProminence is used")
 	errInvalidByDistance   = errors.New("when RankByDistance is specified, one or more of keyword, name, or types is required")
+	errEmptyQuery          = errors.New("The search parameter cannot be empty")
+	errMissingRadius       = errors.New("No radius is specified. The radius is required when specifying a location")
+	errRadiusIsTooGreat    = errors.New("the specified radius is too great, a maximum of 50.000 meters is allowed")
+)
+
+const (
+	maximumRadius = 50000 // The maximum radius for most Google Place services is 50 km
 )
 
 // Nearby lets you search for places within a specified area. You can refine your search request by supplying keywords or specifying the type of place you are searching for.
@@ -65,6 +72,10 @@ func (n *NearbyCall) validate() error {
 		if n.Types == nil && n.Name == "" && n.Keyword == "" {
 			return errInvalidByDistance
 		}
+	}
+
+	if n.Radius > maximumRadius {
+		return errRadiusIsTooGreat
 	}
 	return nil
 }
@@ -188,8 +199,18 @@ type TextSearchCall struct {
 }
 
 func (t *TextSearchCall) validate() error {
-	if t.PageToken != "" {
-		return nil
+	if t.queryStr == "" {
+		return errEmptyQuery
+	}
+
+	if t.lat != 0 || t.lng != 0 {
+		if t.Radius == 0 {
+			return errMissingRadius
+		}
+	}
+
+	if t.Radius > maximumRadius {
+		return errRadiusIsTooGreat
 	}
 
 	return nil
