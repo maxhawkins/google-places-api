@@ -165,7 +165,7 @@ func (r *NearbyCall) query() string {
 	return query.Encode()
 }
 
-// TextSearch let's you search The Text Search Service is a web service that returns information about a set of places based on a string.
+// TextSearch returns information about a set of places based on a string.
 func (p *Service) TextSearch(query string) *TextSearchCall {
 	return &TextSearchCall{
 		service:  p,
@@ -173,7 +173,7 @@ func (p *Service) TextSearch(query string) *TextSearchCall {
 	}
 }
 
-// TextSearchCall the struct that performs the call
+// TextSearchCall represents a call to the Text Search API.
 type TextSearchCall struct {
 	service *Service
 
@@ -216,7 +216,7 @@ func (t *TextSearchCall) validate() error {
 	return nil
 }
 
-// Do Perform the actual request on TextSearchCall
+// Do performs the TextSearchCall request.
 func (t *TextSearchCall) Do() (*SearchResponse, error) {
 	if err := t.validate(); err != nil {
 		return nil, err
