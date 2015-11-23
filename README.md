@@ -71,10 +71,10 @@ This package is a work in progress. Not all API calls are implemented.
 * Place Details
 * Nearby Search
 * Radar Search
+* Text Search
 
 #### What's not done
 
-* Text Search
 * Place Add
 * Place Delete
 * Place Photos
