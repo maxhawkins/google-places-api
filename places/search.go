@@ -261,8 +261,16 @@ func (t *TextSearchCall) query() string {
 		return query.Encode()
 	}
 
-	addLocationToQuery(query, t.lat, t.lng)
-	addTypesToQuery(query, t.Types)
+	query.Add("location", fmt.Sprintf("%f,%f", t.lat, t.lng))
+
+	if len(t.Types) > 0 {
+		var typeNames []string
+		for _, t := range t.Types {
+			typeNames = append(typeNames, string(t))
+		}
+
+		query.Add("types", strings.Join(typeNames, "|"))
+	}
 
 	if t.Language != "" {
 		query.Add("language", t.Language)
@@ -409,19 +417,3 @@ const (
 	// RankByDistance sorts results in ascending order by their distance from the specified location.
 	RankByDistance RankBy = "distance"
 )
-
-func addLocationToQuery(query url.Values, latitude, longitude float64) {
-	if latitude > 0 && longitude > 0 {
-		query.Add("location", fmt.Sprintf("%f,%f", latitude, longitude))
-	}
-}
-
-func addTypesToQuery(query url.Values, types []FeatureType) {
-	var typeNames []string
-	for _, t := range types {
-		typeNames = append(typeNames, string(t))
-	}
-	if len(typeNames) > 0 {
-		query.Add("types", strings.Join(typeNames, "|"))
-	}
-}
