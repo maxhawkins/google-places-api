@@ -15,7 +15,7 @@ var (
 	errInvalidByDistance   = errors.New("when RankByDistance is specified, one or more of keyword, name, or types is required")
 	errEmptyQuery          = errors.New("the search parameter cannot be empty")
 	errMissingRadius       = errors.New("no radius is specified. The radius is required when specifying a location")
-	errRadiusIsTooGreat    = errors.New("the specified radius is too great, a maximum of 50.000 meters is allowed")
+	errRadiusIsTooGreat    = errors.New("radius is too large, a maximum of 50 000 meters is allowed")
 )
 
 const (
