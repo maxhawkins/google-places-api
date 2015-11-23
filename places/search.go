@@ -80,13 +80,11 @@ func (n *NearbyCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-
-	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
@@ -208,12 +206,11 @@ func (t *TextSearchCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-
-	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
@@ -346,6 +343,7 @@ func (r *RadarSearchCall) Do() (*SearchResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
@@ -355,8 +353,6 @@ func (r *RadarSearchCall) Do() (*SearchResponse, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return nil, err
 	}
-
-	defer resp.Body.Close()
 
 	if data.Status != "OK" {
 		return nil, &apiError{
