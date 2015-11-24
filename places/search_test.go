@@ -76,3 +76,59 @@ func TestNearbyCallValidate(t *testing.T) {
 		}
 	}
 }
+
+func TestTextSearchValidate(t *testing.T) {
+	for _, test := range []struct {
+		Name string
+		Call TextSearchCall
+		Want error
+	}{
+		{
+			Name: "Missing search criteria",
+			Call: TextSearchCall{},
+			Want: errEmptyQuery,
+		},
+		{
+			Name: "With search criteria",
+			Call: TextSearchCall{
+				queryStr: "コナミコマンド",
+			},
+			Want: nil,
+		},
+		{
+			Name: "Missing radius",
+			Call: TextSearchCall{
+				queryStr: "foo",
+				lat:      0.0,
+				lng:      0.1,
+			},
+			Want: errMissingRadius,
+		},
+		{
+			Name: "Incorrect radius",
+			Call: TextSearchCall{
+				queryStr: "foo",
+				lat:      27.988056,
+				lng:      86.925278,
+				Radius:   (maximumRadius + 1),
+			},
+			Want: errRadiusIsTooGreat,
+		},
+		{
+			Name: "With correct location and radius",
+			Call: TextSearchCall{
+				queryStr: "foo",
+				lat:      27.988056,
+				lng:      86.925278,
+				Radius:   maximumRadius,
+			},
+			Want: nil,
+		},
+	} {
+		got := test.Call.validate()
+		if got != test.Want {
+			t.Errorf("TextSearchCall{%v}.query() = %#v, want %#v",
+				test.Name, got, test.Want)
+		}
+	}
+}
