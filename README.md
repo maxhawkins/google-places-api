@@ -69,16 +69,16 @@ func main() {
 
 #### What's done
 
-* Place Details
 * Nearby Search
+* Place Details
 * Radar Search
+* Text Search
 
 #### What's not done
 
-* Text Search
 * Place Add
+* Place Autocomplete
 * Place Delete
 * Place Photos
-* Place Autocomplete
 * Query Autocomplete
 * More Examples
