@@ -62,9 +62,10 @@ func main() {
 }
 ```
 
-## Status
+## Gotchas
 
-This package is a work in progress. Not all API calls are implemented.
+* This package is a work in progress. Not all API calls are implemented.
+* [There is a short delay](https://developers.google.com/places/web-service/search#PlaceSearchPaging) between when a NextPageToken is issued, and when it will become valid. Requesting the next page before it is available will return an `INVALID_REQUEST` response. Retrying the request with the same NextPageToken will return the next page of results.
 
 #### What's done
 
