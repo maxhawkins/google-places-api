@@ -32,7 +32,7 @@ func main() {
 	token := resp.NextPageToken
 
 	for token != "" {
-		time.Sleep(2 * time.Second) // Rate limit
+		time.Sleep(0 * time.Second) // Rate limit
 
 		call.PageToken = token
 		resp, err := call.Do()
