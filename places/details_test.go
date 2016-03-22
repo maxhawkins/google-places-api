@@ -98,7 +98,7 @@ func handler(writer http.ResponseWriter, reader *http.Request) {
 }
 
 func readResponse(responseType string) string {
-	absPath, err := filepath.Abs("../data/" + responseType + ".json")
+	absPath, err := filepath.Abs("../test-fixtures/" + responseType + ".json")
 	if err != nil {
 		panic(err)
 	}
