@@ -28,7 +28,7 @@ func main() {
     service := places.NewService(http.DefaultClient, "<your api key>")
 
     call := service.Nearby(37.7833, -122.4167) // San Francisco
-    call.Types = append(call.Types, places.Cafe)
+    call.Type = places.Cafe
     call.Radius = 500
 
     resp, err := call.Do()

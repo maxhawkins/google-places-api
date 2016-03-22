@@ -7,12 +7,11 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 var (
 	errInvalidByProminence = errors.New("radius must be specified when RankByProminence is used")
-	errInvalidByDistance   = errors.New("when RankByDistance is specified, one or more of keyword, name, or types is required")
+	errInvalidByDistance   = errors.New("when RankByDistance is specified, one or more of keyword, name, or type is required")
 	errEmptyQuery          = errors.New("the search parameter cannot be empty")
 	errMissingRadius       = errors.New("no radius is specified. The radius is required when specifying a location")
 	errRadiusIsTooGreat    = errors.New("radius is too large, a maximum of 50 000 meters is allowed")
@@ -51,8 +50,8 @@ type NearbyCall struct {
 	Radius float64
 	// Specifies the order in which results are listed
 	RankBy RankBy
-	// Restricts the results to places matching at least one of the specified types.
-	Types []FeatureType
+	// Restricts the results to places matching the specified type. Only one type may be specified (if more than one type is provided, all types following the first entry are ignored).
+	Type FeatureType
 	// Restricts the search to locations that are Zagat selected businesses.
 	ZagatSelected bool
 	// Returns the next 20 results from a previously run search. Setting a pagetoken parameter will execute a search with the same parameters used previously — all parameters other than pagetoken will be ignored.
@@ -69,7 +68,7 @@ func (n *NearbyCall) validate() error {
 			return errInvalidByProminence
 		}
 	case RankByDistance:
-		if n.Types == nil && n.Name == "" && n.Keyword == "" {
+		if n.Type == "" && n.Name == "" && n.Keyword == "" {
 			return errInvalidByDistance
 		}
 	}
@@ -148,13 +147,8 @@ func (r *NearbyCall) query() string {
 	if r.ZagatSelected {
 		query.Add("zagatselected", "")
 	}
-
-	var typeNames []string
-	for _, t := range r.Types {
-		typeNames = append(typeNames, string(t))
-	}
-	if len(typeNames) > 0 {
-		query.Add("types", strings.Join(typeNames, "|"))
+	if r.Type != "" {
+		query.Add("type", string(r.Type))
 	}
 
 	return query.Encode()
@@ -185,8 +179,8 @@ type TextSearchCall struct {
 	OpenNow bool
 	// Defines the distance (in meters) within which to return place results. The maximum allowed radius is 50 000 meters. Note that radius must not be included if rankby=distance is specified.
 	Radius float64
-	// Restricts the results to places matching at least one of the specified types.
-	Types []FeatureType
+	// Restricts the results to places matching the specified type. Only one type may be specified (if more than one type is provided, all types following the first entry are ignored).
+	Type FeatureType
 	// Restricts the search to locations that are Zagat selected businesses.
 	ZagatSelected bool
 	// Returns the next 20 results from a previously run search. Setting a pagetoken parameter will execute a search with the same parameters used previously — all parameters other than pagetoken will be ignored.
@@ -263,14 +257,8 @@ func (t *TextSearchCall) query() string {
 	if t.lat > 0 && t.lng > 0 {
 		query.Add("location", fmt.Sprintf("%f,%f", t.lat, t.lng))
 	}
-
-	if len(t.Types) > 0 {
-		var typeNames []string
-		for _, t := range t.Types {
-			typeNames = append(typeNames, string(t))
-		}
-
-		query.Add("types", strings.Join(typeNames, "|"))
+	if t.Type != "" {
+		query.Add("type", string(t.Type))
 	}
 
 	if t.Language != "" {
@@ -322,8 +310,8 @@ type RadarSearchCall struct {
 	MinPrice, MaxPrice *PriceLevel
 	// Returns only those places that are open for business at the time the query is sent. Places that do not specify opening hours in the Google Places database will not be returned if you include this parameter in your query.
 	OpenNow bool
-	// Restricts the results to places matching at least one of the specified types.
-	Types []FeatureType
+	// Restricts the results to places matching the specified type. Only one type may be specified (if more than one type is provided, all types following the first entry are ignored).
+	Type FeatureType
 	// Restricts the search to locations that are Zagat selected businesses.
 	ZagatSelected bool
 	// Returns the next 20 results from a previously run search. Setting a pagetoken parameter will execute a search with the same parameters used previously — all parameters other than pagetoken will be ignored.
@@ -337,6 +325,7 @@ func (r *RadarSearchCall) query() string {
 		query.Add("keyword", r.Keyword)
 	}
 	query.Add("location", fmt.Sprintf("%f,%f", r.lat, r.lng))
+	query.Add("radius", fmt.Sprint(r.radius))
 	if r.MinPrice != nil {
 		query.Add("minprice", fmt.Sprint(*r.MinPrice))
 	}
@@ -346,16 +335,9 @@ func (r *RadarSearchCall) query() string {
 	if r.OpenNow {
 		query.Add("opennow", fmt.Sprint(1))
 	}
-	query.Add("radius", fmt.Sprint(r.radius))
-
-	var typeNames []string
-	for _, t := range r.Types {
-		typeNames = append(typeNames, string(t))
+	if r.Type != "" {
+		query.Add("type", string(r.Type))
 	}
-	if len(typeNames) > 0 {
-		query.Add("types", strings.Join(typeNames, "|"))
-	}
-
 	if r.ZagatSelected {
 		query.Add("zagatselected", "")
 	}

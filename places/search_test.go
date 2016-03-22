@@ -48,7 +48,7 @@ func TestNearbyCallValidate(t *testing.T) {
 			Name: "distance call with types",
 			Call: NearbyCall{
 				RankBy: RankByDistance,
-				Types:  []FeatureType{Bar},
+				Type:   Bar,
 			},
 			Want: nil,
 		},
