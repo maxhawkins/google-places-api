@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"gopkg.in/maxhawkins/google-places-api.v2/places"
+	"github.com/maxhawkins/google-places-api/places"
 )
 
 func main() {
