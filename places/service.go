@@ -1,4 +1,4 @@
-// Package places provides a client for the Google Places API
+// Package places has been deprecated. Please use the official client: https://github.com/googlemaps/google-maps-services-go
 package places
 
 import "net/http"
