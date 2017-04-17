@@ -286,6 +286,124 @@ func (t *TextSearchCall) query() string {
 	return query.Encode()
 }
 
+// The Text Search Service is a web service that returns information about a set of places based on a string.
+func (p *Service) TextSearch(query string) *TextSearchCall {
+	return &TextSearchCall{
+		service:  p,
+		queryStr: query,
+	}
+}
+
+type TextSearchCall struct {
+	service *Service
+
+	// The text string on which to search, for example: "restaurant". The Google Places service will return candidate matches based on this string and order the results based on their perceived relevance.
+	queryStr string
+
+	// The latitude/longitude around which to retrieve place information
+	lat, lng float64
+	// The language code, indicating in which language the results should be returned, if possible.
+	Language string
+	// Restricts results to only those places within the specified price level.
+	MinPrice, MaxPrice *PriceLevel
+	// Returns only those places that are open for business at the time the query is sent. Places that do not specify opening hours in the Google Places database will not be returned if you include this parameter in your query.
+	OpenNow bool
+	// Defines the distance (in meters) within which to return place results. The maximum allowed radius is 50 000 meters. Note that radius must not be included if rankby=distance is specified.
+	Radius float64
+	// Restricts the results to places matching at least one of the specified types.
+	Types []FeatureType
+	// Restricts the search to locations that are Zagat selected businesses.
+	ZagatSelected bool
+	// Returns the next 20 results from a previously run search. Setting a pagetoken parameter will execute a search with the same parameters used previously — all parameters other than pagetoken will be ignored.
+	PageToken string
+}
+
+func (t *TextSearchCall) validate() error {
+	if t.PageToken != "" {
+		return nil
+	}
+
+	return nil
+}
+
+func (t *TextSearchCall) Do() (*SearchResponse, error) {
+	if err := t.validate(); err != nil {
+		return nil, err
+	}
+
+	searchURL := baseURL + "/textsearch/json?" + t.query()
+	resp, err := t.service.client.Get(searchURL)
+	if err != nil {
+		return nil, err
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("bad resp %d: %s", resp.StatusCode, body)
+	}
+
+	data := &SearchResponse{}
+	if err := json.Unmarshal(body, data); err != nil {
+		return nil, err
+	}
+
+	if data.Status != "OK" {
+		return nil, &apiError{
+			Status:  data.Status,
+			Message: data.ErrorMessage,
+		}
+	}
+
+	return data, nil
+}
+
+func (t *TextSearchCall) query() string {
+	query := make(url.Values)
+	query.Add("key", t.service.key)
+
+	if t.PageToken != "" {
+		query.Add("pagetoken", t.PageToken)
+		return query.Encode()
+	}
+
+	if t.lat > 0 && t.lng > 0 {
+		query.Add("location", fmt.Sprintf("%f,%f", t.lat, t.lng))
+	}
+	if t.Language != "" {
+		query.Add("language", t.Language)
+	}
+	if t.queryStr != "" {
+		query.Add("query", t.queryStr)
+	}
+	if t.MinPrice != nil {
+		query.Add("minprice", fmt.Sprint(*t.MinPrice))
+	}
+	if t.MaxPrice != nil {
+		query.Add("maxprice", fmt.Sprint(*t.MaxPrice))
+	}
+	if t.OpenNow {
+		query.Add("opennow", fmt.Sprint(1))
+	}
+	if t.Radius > 0 {
+		query.Add("radius", fmt.Sprint(t.Radius))
+	}
+	if t.ZagatSelected {
+		query.Add("zagatselected", "")
+	}
+
+	var typeNames []string
+	for _, t := range t.Types {
+		typeNames = append(typeNames, string(t))
+	}
+	if len(typeNames) > 0 {
+		query.Add("types", strings.Join(typeNames, "|"))
+	}
+
+	return query.Encode()
+}
+
 // RadarSearch returns results from up to 200 places, but with less detail than is typically returned from a Text Search or Nearby Search request.
 func (p *Service) RadarSearch(radius, lat, lng float64) *RadarSearchCall {
 	return &RadarSearchCall{
